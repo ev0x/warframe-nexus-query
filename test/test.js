@@ -6,7 +6,7 @@ const decache = require('decache');
 let WFNQ = require('../index.js');
 
 const should = chai.should();
-const querystring = 'Limbo Prime';
+const querystring = 'Akbolto';
 
 describe('Nexus Query', () => {
   let nexus;
@@ -36,10 +36,21 @@ describe('Nexus Query', () => {
     it('should create an array of objects when called with query', async () => {
       try {
         const result = await nexus.priceCheckQuery(querystring);
-        should.exist(result);
         result.should.be.an('array');
         result[0].should.be.an('object');
       } catch (error) {
+        should.not.exist(error);
+      }
+    }).timeout(10000);
+
+    it('should create an attachment when called with attachment query', async () => {
+      try {
+        const result = await nexus.priceCheckQueryAttachment(querystring);
+        result.should.be.an('array');
+        result[0].should.be.an('object');
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
         should.not.exist(error);
       }
     }).timeout(10000);

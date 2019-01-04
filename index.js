@@ -5,7 +5,7 @@ const md = require('node-md-config');
 const Settings = require('./lib/Settings.js');
 const AttachmentCreator = require('./lib/AttachmentCreator.js');
 const MarketFetcher = require('./lib/market/v1/MarketFetcher.js');
-const NexusFetcher = require('./lib/nexus/v1/NexusFetcher');
+const NexusFetcher = require('./lib/nexus/v2/NexusFetcher');
 
 const noResultAttachment = {
   type: 'rich',
@@ -37,9 +37,9 @@ class PriceCheckQuerier {
 
     try {
       /**
-     * Fetch market data
-     * @type {MarketFetcher}
-     */
+       * Fetch market data
+       * @type {MarketFetcher}
+       */
       this.marketFetcher = new MarketFetcher({ logger, settings: this.settings });
     } catch (e) {
       this.logger.error(`couldn't set up market fetcher: ${e.message}`);
