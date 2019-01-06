@@ -48,6 +48,22 @@ describe('Nexus Query', () => {
         const result = await nexus.priceCheckQueryAttachment(querystring);
         result.should.be.an('array');
         result[0].should.be.an('object');
+        should.exist(result[0].fields);
+        result[0].fields.should.be.an('array');
+        result[0].fields.length.to.equal(2);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+        should.not.exist(error);
+      }
+    }).timeout(10000);
+
+    it('should create an no results for attachment query', async () => {
+      try {
+        const result = await nexus.priceCheckQueryAttachment('nonagon');
+        result.should.be.an('array');
+        result[0].should.be.an('object');
+        should.not.exist(result[0].fields);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error);
